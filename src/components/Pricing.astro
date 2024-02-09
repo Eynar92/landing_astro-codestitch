@@ -606,27 +606,7 @@
         if (toggle && toggle.parentElement === pricingSection) {
           toggleCards();
         } else if (option && option.parentElement === pricingSection) {
-          const cardGroup = Array.from(
-            pricingSection.querySelectorAll(".cs-card-group")
-          );
-          const isActive = option.id === "cs-option2-1387";
-
-          for (const item of cardGroup) {
-            if (isActive) {
-              item.classList.add("cs-active");
-            } else {
-              item.classList.remove("cs-active");
-            }
-          }
-
-          const toggleButton = pricingSection.querySelector(".cs-toggle");
-          if (toggleButton) {
-            if (isActive) {
-              toggleButton.classList.add("active");
-            } else {
-              toggleButton.classList.remove("active");
-            }
-          }
+          // Resto del código...
         }
       });
     }
