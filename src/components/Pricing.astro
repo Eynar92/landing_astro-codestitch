@@ -594,31 +594,56 @@
   }
 </style>
 <script>
-  const leftOption = document.querySelector("#pricing-1387 #cs-option1-1387");
-  const rightOption = document.querySelector("#pricing-1387 #cs-option2-1387");
-  const toggle = document.querySelector("#pricing-1387 .cs-toggle");
-  const cardGroup = Array.from(
-    document.querySelectorAll("#pricing-1387 .cs-card-group")
-  );
-  // when you click the middle toggle
-  toggle.addEventListener("click", (e) => {
-    for (const item of cardGroup) {
-      item.classList.toggle("cs-active");
+  document.addEventListener("DOMContentLoaded", function () {
+    const pricingSection = document.querySelector("#pricing-1387");
+
+    if (pricingSection) {
+      pricingSection.addEventListener("click", function (e) {
+        const target = e.target;
+        const toggle = target.closest(".cs-toggle");
+        const option = target.closest(".cs-option");
+
+        if (toggle && toggle.parentElement === pricingSection) {
+          toggleCards();
+        } else if (option && option.parentElement === pricingSection) {
+          const cardGroup = Array.from(
+            pricingSection.querySelectorAll(".cs-card-group")
+          );
+          const isActive = option.id === "cs-option2-1387";
+
+          for (const item of cardGroup) {
+            if (isActive) {
+              item.classList.add("cs-active");
+            } else {
+              item.classList.remove("cs-active");
+            }
+          }
+
+          const toggleButton = pricingSection.querySelector(".cs-toggle");
+          if (toggleButton) {
+            if (isActive) {
+              toggleButton.classList.add("active");
+            } else {
+              toggleButton.classList.remove("active");
+            }
+          }
+        }
+      });
     }
-    toggle.classList.toggle("active");
-  });
-  // when you click the left button option
-  leftOption.addEventListener("click", (e) => {
-    for (const item of cardGroup) {
-      item.classList.remove("cs-active");
+
+    function toggleCards() {
+      const cardGroups = Array.from(
+        pricingSection.querySelectorAll(".cs-card-group")
+      );
+      const toggleButton = pricingSection.querySelector(".cs-toggle");
+
+      for (const item of cardGroups) {
+        item.classList.toggle("cs-active");
+      }
+
+      if (toggleButton) {
+        toggleButton.classList.toggle("active");
+      }
     }
-    toggle.classList.remove("active");
-  });
-  // when you click the right button option
-  rightOption.addEventListener("click", (e) => {
-    for (const item of cardGroup) {
-      item.classList.add("cs-active");
-    }
-    toggle.classList.add("active");
   });
 </script>
