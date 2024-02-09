@@ -600,13 +600,33 @@
     if (pricingSection) {
       pricingSection.addEventListener("click", function (e) {
         const target = e.target;
-        const toggle = target.closest(".cs-toggle");
-        const option = target.closest(".cs-option");
+        const toggle = target.closest && target.closest(".cs-toggle");
+        const option = target.closest && target.closest(".cs-option");
 
         if (toggle && toggle.parentElement === pricingSection) {
           toggleCards();
         } else if (option && option.parentElement === pricingSection) {
-          // Resto del código...
+          const cardGroup = Array.from(
+            pricingSection.querySelectorAll(".cs-card-group")
+          );
+          const isActive = option.id === "cs-option2-1387";
+
+          for (const item of cardGroup) {
+            if (isActive) {
+              item.classList.add("cs-active");
+            } else {
+              item.classList.remove("cs-active");
+            }
+          }
+
+          const toggleButton = pricingSection.querySelector(".cs-toggle");
+          if (toggleButton) {
+            if (isActive) {
+              toggleButton.classList.add("active");
+            } else {
+              toggleButton.classList.remove("active");
+            }
+          }
         }
       });
     }
